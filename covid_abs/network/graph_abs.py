@@ -78,6 +78,7 @@ class GraphSimulation(Simulation):
         :param status: a value of agents.Status enum
         :return: the newly created agent
         """
+        print("Creating new agent!")
         if self.bespoke_agent is not None:
             age = int(self.bespoke_agent())
             print("Generated agent using bespoke age function!")
