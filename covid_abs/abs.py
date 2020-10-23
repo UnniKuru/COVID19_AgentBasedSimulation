@@ -113,6 +113,7 @@ class Simulation(object):
 
         if self.bespoke_agent is not None:
             age = int(self.bespoke_agent())
+            print("Generated agent using bespoke age function!")
         else:
             age = int(np.random.beta(2, 5, 1) * 100)
         social_stratum = int(np.random.rand(1) * 100 // 20)
