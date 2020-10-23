@@ -113,6 +113,7 @@ class Simulation(object):
 
         if self.bespoke_agent is not None:
             age = int(self.bespoke_agent())
+            raise NotImplementedError("Testing! Bespoke Agent.")
             print("Generated agent using bespoke age function!")
         else:
             age = int(np.random.beta(2, 5, 1) * 100)
