@@ -12,8 +12,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     author='Petronio Candido L. e Silva',
     author_email='petronio.candido@gmail.com',
-    url='https://github.com/petroniocandido/COVID19_AgentBasedSimulation',
-    download_url='https://github.com/petroniocandido/COVID19_AgentBasedSimulation',
+    url='https://github.com/UnniKuru/COVID19_AgentBasedSimulation',
+    download_url='https://github.com/UnniKuru/COVID19_AgentBasedSimulation',
     keywords=['covid19', 'simulation', 'agent based simulation'],
     classifiers=[
         'Programming Language :: Python :: 3',
