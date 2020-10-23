@@ -32,6 +32,9 @@ class GraphSimulation(Simulation):
         self.recovering_time = kwargs.get('recovering_time', 20)
         self.bespoke_agent = kwargs.get("bespoke_agent",None)
 
+    def test12345(self):
+        return "hello darkness my old friend"
+
     def register_callback(self, event, action):
         self.callbacks[event] = action
 
