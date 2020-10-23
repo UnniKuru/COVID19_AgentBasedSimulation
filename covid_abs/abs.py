@@ -48,6 +48,8 @@ class Simulation(object):
 
         self.total_wealth = kwargs.get("total_wealth", 10 ** 4)
 
+        self.bespoke_agent = kwargs.get("bespoke_agent",None)
+
     def _xclip(self, x):
         return np.clip(int(x), 0, self.length)
 
@@ -109,7 +111,10 @@ class Simulation(object):
         """
         x, y = self.random_position()
 
-        age = int(np.random.beta(2, 5, 1) * 100)
+        if self.bespoke_agent is not None:
+            age = int(self.bespoke_agent())
+        else:
+            age = int(np.random.beta(2, 5, 1) * 100)
         social_stratum = int(np.random.rand(1) * 100 // 20)
         self.population.append(Agent(x=x, y=y, age=age, status=status, social_stratum=social_stratum))
 
