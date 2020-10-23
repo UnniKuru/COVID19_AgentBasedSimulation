@@ -83,6 +83,7 @@ class GraphSimulation(Simulation):
             print("Generated agent using bespoke age function!")
         else:
             age = int(np.random.beta(2, 5, 1) * 100)
+            print("Generated agent using built-in beta function.")
         if social_stratum is None:
             social_stratum = int(np.random.rand(1) * 100 // 20)
         person = Person(age=age, status=status, social_stratum=social_stratum, infected_time=infected_time,
