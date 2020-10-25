@@ -334,8 +334,11 @@ class Person(Agent):
 
         if self.infected_status != InfectionSeverity.Asymptomatic:
             return
-
-        x,y = np.random.normal(0, self.environment.amplitudes[self.status], 2)
+        mvt_amplitude = self.environment.amplitudes[self.status]
+        if self.age >= 18 and self.age <=29:
+            print("college student *= 1.5")
+            mvt_amplitude *= 1.5
+        x,y = np.random.normal(0, mvt_amplitude, 2)
         self.x = int(self.x + x)
         self.y = int(self.y + y)
 

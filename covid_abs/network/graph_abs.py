@@ -32,9 +32,6 @@ class GraphSimulation(Simulation):
         self.recovering_time = kwargs.get('recovering_time', 20)
         self.bespoke_agent = kwargs.get("bespoke_agent",None)
 
-    def test12345(self):
-        return "hello darkness my old friend"
-
     def register_callback(self, event, action):
         self.callbacks[event] = action
 
@@ -81,13 +78,10 @@ class GraphSimulation(Simulation):
         :param status: a value of agents.Status enum
         :return: the newly created agent
         """
-        print("Creating new agent!")
         if self.bespoke_agent is not None:
             age = int(self.bespoke_agent())
-            print("Generated agent using bespoke age function!")
         else:
             age = int(np.random.beta(2, 5, 1) * 100)
-            print("Generated agent using built-in beta function.")
         if social_stratum is None:
             social_stratum = int(np.random.rand(1) * 100 // 20)
         person = Person(age=age, status=status, social_stratum=social_stratum, infected_time=infected_time,
