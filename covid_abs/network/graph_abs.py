@@ -31,6 +31,8 @@ class GraphSimulation(Simulation):
         self.contagion_time = kwargs.get('contagion_time', 10)
         self.recovering_time = kwargs.get('recovering_time', 20)
         self.bespoke_agent = kwargs.get("bespoke_agent",None)
+        self.student_contagion_multiplier = kwargs.get("student_contagion_multiplier",1)
+        self.student_mobility_multiplier = kwargs.get("student_mobility_multiplier",1)
 
     def register_callback(self, event, action):
         self.callbacks[event] = action
@@ -79,13 +81,13 @@ class GraphSimulation(Simulation):
         :return: the newly created agent
         """
         if self.bespoke_agent is not None:
-            age = int(self.bespoke_agent())
+            age, student = int(self.bespoke_agent())
         else:
-            age = int(np.random.beta(2, 5, 1) * 100)
+            age, student = (int(np.random.beta(2, 5, 1) * 100),False)
         if social_stratum is None:
             social_stratum = int(np.random.rand(1) * 100 // 20)
         person = Person(age=age, status=status, social_stratum=social_stratum, infected_time=infected_time,
-                        environment=self)
+                        environment=self,student=student)
         self.callback('on_create_person', person)
         self.population.append(person)
 
@@ -296,7 +298,11 @@ class GraphSimulation(Simulation):
                     and agent2.infected_time <= self.contagion_time + up:
                 contagion_test = np.random.random()
                 #agent1.infection_status = InfectionSeverity.Exposed
-                if contagion_test <= self.contagion_rate:
+                contagion_rate = self.contagion_rate
+                if agent1.student and agent2.student:
+                    contagion_rate = min(1,self.student_contagion_multiplier * contagion_rate)
+                    print("Student Contagion Rate used. Contagion = {}".format(contagion_rate))
+                if contagion_test <= contagion_rate:
                     agent1.status = Status.Infected
                     agent1.infection_status = InfectionSeverity.Asymptomatic
 

@@ -266,6 +266,7 @@ class Person(Agent):
         self.economical_status = EconomicalStatus.Inactive
         self.incomes = kwargs.get("income", 0.0)
         self.expenses = kwargs.get("expense", 0.0)
+        self.student = kwargs.get("student",False)
 
         if self.age > 16 and self.age <= 65:
             self.economical_status = EconomicalStatus.Active
@@ -335,8 +336,9 @@ class Person(Agent):
         if self.infected_status != InfectionSeverity.Asymptomatic:
             return
         mvt_amplitude = self.environment.amplitudes[self.status]
-        if self.age >= 18 and self.age <=29:
-            mvt_amplitude *= 1.5
+        if self.student:
+            mvt_amplitude *= self.environment.student_mobility_multiplier
+            print("we mobile baby. Prev = {}. New = {}".format(self.environment.amplitudes[self.status],mvt_amplitude))
         x,y = np.random.normal(0, mvt_amplitude, 2)
         self.x = int(self.x + x)
         self.y = int(self.y + y)
