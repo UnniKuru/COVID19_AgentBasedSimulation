@@ -81,7 +81,8 @@ class GraphSimulation(Simulation):
         :return: the newly created agent
         """
         if self.bespoke_agent is not None:
-            age, student = int(self.bespoke_agent())
+            age, student = self.bespoke_agent()
+            age = int(age)
         else:
             age, student = (int(np.random.beta(2, 5, 1) * 100),False)
         if social_stratum is None:
