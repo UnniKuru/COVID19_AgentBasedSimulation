@@ -336,7 +336,6 @@ class Person(Agent):
             return
         mvt_amplitude = self.environment.amplitudes[self.status]
         if self.age >= 18 and self.age <=29:
-            print("college student *= 1.5")
             mvt_amplitude *= 1.5
         x,y = np.random.normal(0, mvt_amplitude, 2)
         self.x = int(self.x + x)
