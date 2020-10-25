@@ -170,7 +170,7 @@ class GraphSimulation(Simulation):
 
                     unemployed_test = np.random.rand()
 
-                    if unemployed_test >= self.unemployment_rate:
+                    if unemployed_test >= self.unemployment_rate and not agent.student:
                         ix = np.random.randint(0, self.total_business)
                         self.business[ix].hire(agent)
 
@@ -302,7 +302,6 @@ class GraphSimulation(Simulation):
                 contagion_rate = self.contagion_rate
                 if agent1.student and agent2.student:
                     contagion_rate = min(1,self.student_contagion_multiplier * contagion_rate)
-                    print("Student Contagion Rate used. Contagion = {}".format(contagion_rate))
                 if contagion_test <= contagion_rate:
                     agent1.status = Status.Infected
                     agent1.infection_status = InfectionSeverity.Asymptomatic

@@ -338,7 +338,6 @@ class Person(Agent):
         mvt_amplitude = self.environment.amplitudes[self.status]
         if self.student:
             mvt_amplitude *= self.environment.student_mobility_multiplier
-            print("we mobile baby. Prev = {}. New = {}".format(self.environment.amplitudes[self.status],mvt_amplitude))
         x,y = np.random.normal(0, mvt_amplitude, 2)
         self.x = int(self.x + x)
         self.y = int(self.y + y)
