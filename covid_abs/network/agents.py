@@ -124,9 +124,13 @@ class Business(Agent):
             tax = self.taxes()
 
             if 2 * (labor + tax) < self.incomes:
-                unemployed = self.environment.get_unemployed()
-                ix = np.random.randint(0, len(unemployed))
-                self.hire(unemployed[ix])
+                try:
+                    unemployed = self.environment.get_unemployed()
+                    ix = np.random.randint(0, len(unemployed))
+                    self.hire(unemployed[ix])
+                except ValueError e:
+                    print("ValueError in accounting function. Num Unemployed: {}".format(len(unemployed)))
+                    
             elif (labor + tax) > self.incomes:
                 ix = np.random.randint(0, self.num_employees)
                 self.fire(self.employees[ix])
