@@ -128,7 +128,7 @@ class Business(Agent):
                     unemployed = self.environment.get_unemployed()
                     ix = np.random.randint(0, len(unemployed))
                     self.hire(unemployed[ix])
-                except ValueError e:
+                except ValueError:
                     print("ValueError in accounting function. Num Unemployed: {}".format(len(unemployed)))
                     
             elif (labor + tax) > self.incomes:
